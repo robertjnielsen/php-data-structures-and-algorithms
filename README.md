@@ -11,7 +11,7 @@ While Code Fellows does not currently offer any PHP programs or cohorts, I thoug
 ## Table Of Contents
 ##### Code Challenges
 1. [Array Reverse](Challenges/ArrayReverse/array_reverse.md)
-2. [Insert Shift Array](Challenges/insert_shift_array/insert_shift_array.md)
+2. [Insert Shift Array](Challenges/InsertShiftArray/insert_shift_array.md)
 
 ##### Data Structures
 

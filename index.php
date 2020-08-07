@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 require("vendor/autoload.php");
 use DSA\Challenges\ArrayReverse\ArrayReverse;
+use DSA\Challenges\InsertShiftArray\InsertShiftArray;
 
 
 /**
@@ -25,4 +26,22 @@ $arr = [1, 2, 3, 4, 5, 6, 7];
 $arr = ArrayReverse::reverseArray($arr);
 
 // Dump the array to verify.
-var_dump($arr);
+// var_dump($arr);
+
+
+
+/**
+ * Insert Shift Array Challenge
+ */
+
+// The array to insert an element into.
+$arr = [1, 3, 5, 9, 11, 13];
+
+// The element to insert into the array.
+$el = 7;
+
+// The challenge action.
+$arr = InsertShiftArray::InsertShiftArray($arr, $el);
+
+// Dump the array to verify.
+// var_dump($arr);
