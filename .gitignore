@@ -1,2 +1,8 @@
 ### PHPStorm ###
 .idea/
+
+### Composer / Dependencies ###
+vendor
+
+### PHPUnit ###
+.phpunit.result.cache
