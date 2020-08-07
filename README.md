@@ -19,8 +19,14 @@ Unit testing was accomplished via the PHPUnit testing framework. All classes / m
 3. [Binary Search](Challenges/BinarySearch/binary_search.md)
 
 ##### Data Structures
+1. [Linked Lists](DataStructures/LinkedList/linked_list.md)
 
 ## Change Log
+
+**v1.4**: 20200807
+- Added unit testing for `Linked List` data structure.
+- Completed `Linked List` data structure.
+
 **v1.3**: 20200806
 - Added unit testing for `Binary Search` challenge.
 - Completed `Binary Search` challenge.
