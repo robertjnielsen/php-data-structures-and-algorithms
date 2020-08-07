@@ -4,6 +4,16 @@ declare(strict_types=1);
 require("vendor/autoload.php");
 use DSA\Challenges\ArrayReverse\ArrayReverse;
 
+
+/**
+ * Challenges are below in various sections.
+ * To run a specific challenge, simply un-comment
+ * out the var_dump function call within that section
+ * to verify it works.
+ */
+
+
+
 /**
  * Array Reverse Challenge
  */
