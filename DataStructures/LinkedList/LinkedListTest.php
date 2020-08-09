@@ -2,11 +2,14 @@
 
 namespace DSA\DataStructures\LinkedList;
 
-use phpDocumentor\Reflection\DocBlock\Tags\Link;
+use Exception;
 use PHPUnit\Framework\TestCase;
 
 class LinkedListTest extends TestCase
 {
+    /**
+     * @test Tests that an empty Linked List can be instantiated.
+     */
     public function testCanInstantiateAnEmptyLinkedList()
     {
         // Arrange & Act
@@ -18,6 +21,9 @@ class LinkedListTest extends TestCase
         );
     }
 
+    /**
+     * @test Tests that a Node can be inserted to the beginning of a Linked List.
+     */
     public function testCanProperlyInsertANodeIntoALinkedList()
     {
         // Arrange
@@ -34,6 +40,9 @@ class LinkedListTest extends TestCase
         );
     }
 
+    /**
+     * @test Tests that multiple Nodes can be inserted to the beginning of a Linked List.
+     */
     public function testCanProperlyInsertMultipleNodesIntoALinkedList()
     {
         // Arrange
@@ -52,6 +61,9 @@ class LinkedListTest extends TestCase
         );
     }
 
+    /**
+     * @test Tests that a given value found within a Linked List returns true.
+     */
     public function testCanReturnTrueWhenFindingAValueWithinALinkedList()
     {
         // Arrange
@@ -68,6 +80,9 @@ class LinkedListTest extends TestCase
         );
     }
 
+    /**
+     * @test Tests that a given value NOT found within a Linked List returns false.
+     */
     public function testCanReturnFalseWhenAValueIsNotPresentInALinkedList()
     {
         $ll = new LinkedList();
@@ -81,6 +96,9 @@ class LinkedListTest extends TestCase
         );
     }
 
+    /**
+     * @test Tests that all Node values within a Linked List can be output in string format.
+     */
     public function testCanOutputAllValuesExistingWithinALinkedList()
     {
         $ll = new LinkedList();
@@ -89,6 +107,142 @@ class LinkedListTest extends TestCase
         $ll->insert(3);
         $ll->insert(9);
         $ll->insert(19);
+
+        $this->assertEquals(
+            $expected,
+            $ll->toString()
+        );
+    }
+
+    /**
+     * @test Tests that a Node can be appended to the end of a Linked List.
+     */
+    public function testCanAppendANodeToTheEndOfALinkedList()
+    {
+        $ll = new LinkedList();
+        $expected = "{ 9 } -> { 3 } -> { 19 } -> NULL";
+
+        $ll->insert(3);
+        $ll->insert(9);
+        $ll->append(19);
+
+        $this->assertTrue(
+            $ll->includes(19)
+        );
+
+        $this->assertEquals(
+            $expected,
+            $ll->toString()
+        );
+    }
+
+    /**
+     * @test Tests that multiple Node objects can be appended to the end of a Linked List.
+     */
+    public function testCanAppendMultipleNodesToTheEndOfALinkedList()
+    {
+        $ll = new LinkedList();
+        $expected = "{ 9 } -> { 3 } -> { 19 } -> { 42 } -> { 101 } -> NULL";
+
+        $ll->insert(3);
+        $ll->insert(9);
+        $ll->append(19);
+        $ll->append(42);
+        $ll->append(101);
+
+        $this->assertEquals(
+            $expected,
+            $ll->toString()
+        );
+    }
+
+    /**
+     * @test Tests that a new Node can be inserted into the middle of the List before a given existing value.
+     *
+     * @throws Exception Thrown when the given value to insert before does not exist within the Linked List.
+     */
+    public function testCanInsertANewNodeBeforeAnExistingNodeWithinALinkedList()
+    {
+        $ll = new LinkedList();
+        $expected = "{ 3 } -> { 9 } -> { 19 } -> { 27 } -> { 42 } -> NULL";
+
+        $ll->append(3);
+        $ll->append(9);
+        $ll->append(27);
+        $ll->append(42);
+
+        $ll->insertBefore(27, 19);
+
+        $this->assertEquals(
+            $expected,
+            $ll->toString()
+        );
+    }
+
+    /**
+     * @test Tests that a new Node can be inserted before the Head Node of a Linked List with a given value.
+     *
+     * @throws Exception Thrown when the given value to insert before does not exist within the Linked List.
+     */
+    public function testCanInsertANewNodeBeforeTheHeadNodeInALinkedList()
+    {
+        $ll = new LinkedList();
+        $expected = "{ 3 } -> { 9 } -> { 19 } -> { 27 } -> { 42 } -> NULL";
+
+        $ll->append(9);
+        $ll->append(19);
+        $ll->append(27);
+        $ll->append(42);
+
+        $ll->insertBefore(9, 3);
+
+        $this->assertEquals(
+            $expected,
+            $ll->toString()
+        );
+    }
+
+    /**
+     * @test Tests that a new Node can be inserted into the middle of a Linked List directly after a given Node in the List.
+     *
+     * @throws Exception Thrown when the given value to insert after does not exist within the Linked List.
+     */
+    public function testCanInsertANewNodeAfterAnExistingNodeInTheMiddleOfALinkedList()
+    {
+        $ll = new LinkedList();
+        $expected = "{ 3 } -> { 9 } -> { 19 } -> { 27 } -> { 42 } -> NULL";
+
+        $ll->append(3);
+        $ll->append(9);
+        $ll->append(27);
+        $ll->append(42);
+
+        $ll->insertAfter(9, 19);
+
+        $this->assertEquals(
+            $expected,
+            $ll->toString()
+        );
+    }
+
+    /**
+     * @test Tests that a given Node value can be removed from within a Linked List.
+     *
+     * @throws Exception Thrown when the given value to remove does not exist within the Linked List.
+     */
+    public function testCanDeleteANodeFromWithinALinkedList()
+    {
+        $ll = new LinkedList();
+        $expected = "{ 3 } -> { 9 } -> { 19 } -> { 27 } -> { 42 } -> NULL";
+
+        $ll->append(3);
+        $ll->append(9);
+        $ll->append(19);
+        $ll->append(27);
+        $ll->append(33);
+        $ll->append(42);
+
+        $ll->removeNode(33);
 
         $this->assertEquals(
             $expected,
