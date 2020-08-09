@@ -71,7 +71,7 @@ class LinkedList
      * @param mixed $existingValue The value of the Node to insert after.
      * @param mixed $newValue The new Node value to insert into the Linked List.
      *
-     * @throws Exception Thrown when the given value to insert before does not exist within the Linked List.
+     * @throws Exception Thrown when the given value to insert after does not exist within the Linked List.
      */
     public function insertAfter($existingValue, $newValue): void
     {
@@ -115,6 +115,33 @@ class LinkedList
             $currentNode->next = $newNode;
 
             $newNode->next = null;
+        }
+    }
+
+    /**
+     * Removes a given Node value from the Linked List.
+     *
+     * @param mixed $existingValue The Node value to remove from the Linked List.
+     *
+     * @throws Exception Thrown when the given value to remove does not exist within the Linked List.
+     */
+    public function removeNode($existingValue): void
+    {
+        // Check if the value even exists within the Linked List.
+        if (! $this->includes($existingValue)) {
+            throw new Exception("{$existingValue} is not a value contained within the Linked List.");
+        }
+
+        $current = $this->head;
+
+        if ($current->value === $existingValue) {
+            $this->head = $current->next;
+        } else {
+            while ($current->next->value !== $existingValue) {
+                $current = $current->next;
+            }
+
+            $current->next = $current->next->next;
         }
     }
 

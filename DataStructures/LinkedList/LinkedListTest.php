@@ -97,7 +97,7 @@ class LinkedListTest extends TestCase
     }
 
     /**
-     * Tests that all Node values within a Linked List can be output in string format.
+     * @test Tests that all Node values within a Linked List can be output in string format.
      */
     public function testCanOutputAllValuesExistingWithinALinkedList()
     {
@@ -205,7 +205,7 @@ class LinkedListTest extends TestCase
     /**
      * @test Tests that a new Node can be inserted into the middle of a Linked List directly after a given Node in the List.
      *
-     * @throws Exception Thrown when the given value to insert before does not exist within the Linked List.
+     * @throws Exception Thrown when the given value to insert after does not exist within the Linked List.
      */
     public function testCanInsertANewNodeAfterAnExistingNodeInTheMiddleOfALinkedList()
     {
@@ -218,6 +218,31 @@ class LinkedListTest extends TestCase
         $ll->append(42);
 
         $ll->insertAfter(9, 19);
+
+        $this->assertEquals(
+            $expected,
+            $ll->toString()
+        );
+    }
+
+    /**
+     * @test Tests that a given Node value can be removed from within a Linked List.
+     *
+     * @throws Exception Thrown when the given value to remove does not exist within the Linked List.
+     */
+    public function testCanDeleteANodeFromWithinALinkedList()
+    {
+        $ll = new LinkedList();
+        $expected = "{ 3 } -> { 9 } -> { 19 } -> { 27 } -> { 42 } -> NULL";
+
+        $ll->append(3);
+        $ll->append(9);
+        $ll->append(19);
+        $ll->append(27);
+        $ll->append(33);
+        $ll->append(42);
+
+        $ll->removeNode(33);
 
         $this->assertEquals(
             $expected,
