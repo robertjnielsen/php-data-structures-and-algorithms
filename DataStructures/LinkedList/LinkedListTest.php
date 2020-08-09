@@ -2,6 +2,7 @@
 
 namespace DSA\DataStructures\LinkedList;
 
+use Exception;
 use PHPUnit\Framework\TestCase;
 
 class LinkedListTest extends TestCase
@@ -148,6 +149,75 @@ class LinkedListTest extends TestCase
         $ll->append(19);
         $ll->append(42);
         $ll->append(101);
+
+        $this->assertEquals(
+            $expected,
+            $ll->toString()
+        );
+    }
+
+    /**
+     * @test Tests that a new Node can be inserted into the middle of the List before a given existing value.
+     *
+     * @throws Exception Thrown when the given value to insert before does not exist within the Linked List.
+     */
+    public function testCanInsertANewNodeBeforeAnExistingNodeWithinALinkedList()
+    {
+        $ll = new LinkedList();
+        $expected = "{ 3 } -> { 9 } -> { 19 } -> { 27 } -> { 42 } -> NULL";
+
+        $ll->append(3);
+        $ll->append(9);
+        $ll->append(27);
+        $ll->append(42);
+
+        $ll->insertBefore(27, 19);
+
+        $this->assertEquals(
+            $expected,
+            $ll->toString()
+        );
+    }
+
+    /**
+     * @test Tests that a new Node can be inserted before the Head Node of a Linked List with a given value.
+     *
+     * @throws Exception Thrown when the given value to insert before does not exist within the Linked List.
+     */
+    public function testCanInsertANewNodeBeforeTheHeadNodeInALinkedList()
+    {
+        $ll = new LinkedList();
+        $expected = "{ 3 } -> { 9 } -> { 19 } -> { 27 } -> { 42 } -> NULL";
+
+        $ll->append(9);
+        $ll->append(19);
+        $ll->append(27);
+        $ll->append(42);
+
+        $ll->insertBefore(9, 3);
+
+        $this->assertEquals(
+            $expected,
+            $ll->toString()
+        );
+    }
+
+    /**
+     * @test Tests that a new Node can be inserted into the middle of a Linked List directly after a given Node in the List.
+     *
+     * @throws Exception Thrown when the given value to insert before does not exist within the Linked List.
+     */
+    public function testCanInsertANewNodeAfterAnExistingNodeInTheMiddleOfALinkedList()
+    {
+        $ll = new LinkedList();
+        $expected = "{ 3 } -> { 9 } -> { 19 } -> { 27 } -> { 42 } -> NULL";
+
+        $ll->append(3);
+        $ll->append(9);
+        $ll->append(27);
+        $ll->append(42);
+
+        $ll->insertAfter(9, 19);
 
         $this->assertEquals(
             $expected,

@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace DSA\DataStructures\LinkedList;
 
+use Exception;
+
 class LinkedList
 {
     /**
@@ -33,6 +35,67 @@ class LinkedList
     }
 
     /**
+     * Inserts a new Node with a given value, before another Node in the Linked List with a given value.
+     *
+     * @param mixed $value The value of the Node to insert before.
+     * @param mixed $newValue The new Node value to insert into the Linked List.
+     *
+     * @throws Exception Thrown when the given value to insert before does not exist within the Linked List.
+     */
+    public function insertBefore($value, $newValue): void
+    {
+        // Check if the value even exists within the Linked List.
+        if (! $this->includes($value)) {
+            throw new Exception("{$value} is not a value contained within the Linked List.");
+        }
+
+        $newNode = new Node($newValue);
+        $current = $this->head;
+
+        if ($current->value === $value) {
+            $newNode->next = $current;
+            $this->head = $newNode;
+        } else {
+            while ($current->next->value !== $value) {
+                $current = $current->next;
+            }
+
+            $newNode->next = $current->next;
+            $current->next = $newNode;
+        }
+    }
+
+    /**
+     * Inserts a new Node into the Linked List directly after an existing Node.
+     *
+     * @param mixed $existingValue The value of the Node to insert after.
+     * @param mixed $newValue The new Node value to insert into the Linked List.
+     *
+     * @throws Exception Thrown when the given value to insert before does not exist within the Linked List.
+     */
+    public function insertAfter($existingValue, $newValue): void
+    {
+        // Check if the value even exists within the Linked List.
+        if (! $this->includes($existingValue)) {
+            throw new Exception("{$existingValue} is not a value contained within the Linked List.");
+        }
+
+        $newNode = new Node($newValue);
+        $current = $this->head;
+
+        if ($current->value === $existingValue) {
+            $current->next = $newNode;
+        } else {
+            while ($current->value !== $existingValue) {
+                $current = $current->next;
+            }
+
+            $newNode->next = $current->next;
+            $current->next = $newNode;
+        }
+    }
+
+    /**
      * Appends a new Node to the end of the Linked List.
      *
      * @param mixed $value The given value that the new Node to append to the Linked List should hold.
@@ -40,16 +103,19 @@ class LinkedList
     public function append($value): void
     {
         $newNode = new Node($value);
-
         $currentNode = $this->head;
 
-        while ($currentNode->next !== null) {
-            $currentNode = $currentNode->next;
+        if ($currentNode === null) {
+            $this->head = $newNode;
+        } else {
+            while ($currentNode->next !== null) {
+                $currentNode = $currentNode->next;
+            }
+
+            $currentNode->next = $newNode;
+
+            $newNode->next = null;
         }
-
-        $currentNode->next = $newNode;
-
-        $newNode->next = null;
     }
 
     /**
