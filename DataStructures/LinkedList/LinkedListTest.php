@@ -2,11 +2,13 @@
 
 namespace DSA\DataStructures\LinkedList;
 
-use phpDocumentor\Reflection\DocBlock\Tags\Link;
 use PHPUnit\Framework\TestCase;
 
 class LinkedListTest extends TestCase
 {
+    /**
+     * @test Tests that an empty Linked List can be instantiated.
+     */
     public function testCanInstantiateAnEmptyLinkedList()
     {
         // Arrange & Act
@@ -18,6 +20,9 @@ class LinkedListTest extends TestCase
         );
     }
 
+    /**
+     * @test Tests that a Node can be inserted to the beginning of a Linked List.
+     */
     public function testCanProperlyInsertANodeIntoALinkedList()
     {
         // Arrange
@@ -34,6 +39,9 @@ class LinkedListTest extends TestCase
         );
     }
 
+    /**
+     * @test Tests that multiple Nodes can be inserted to the beginning of a Linked List.
+     */
     public function testCanProperlyInsertMultipleNodesIntoALinkedList()
     {
         // Arrange
@@ -52,6 +60,9 @@ class LinkedListTest extends TestCase
         );
     }
 
+    /**
+     * @test Tests that a given value found within a Linked List returns true.
+     */
     public function testCanReturnTrueWhenFindingAValueWithinALinkedList()
     {
         // Arrange
@@ -68,6 +79,9 @@ class LinkedListTest extends TestCase
         );
     }
 
+    /**
+     * @test Tests that a given value NOT found within a Linked List returns false.
+     */
     public function testCanReturnFalseWhenAValueIsNotPresentInALinkedList()
     {
         $ll = new LinkedList();
@@ -81,6 +95,9 @@ class LinkedListTest extends TestCase
         );
     }
 
+    /**
+     * Tests that all Node values within a Linked List can be output in string format.
+     */
     public function testCanOutputAllValuesExistingWithinALinkedList()
     {
         $ll = new LinkedList();
@@ -89,6 +106,48 @@ class LinkedListTest extends TestCase
         $ll->insert(3);
         $ll->insert(9);
         $ll->insert(19);
+
+        $this->assertEquals(
+            $expected,
+            $ll->toString()
+        );
+    }
+
+    /**
+     * @test Tests that a Node can be appended to the end of a Linked List.
+     */
+    public function testCanAppendANodeToTheEndOfALinkedList()
+    {
+        $ll = new LinkedList();
+        $expected = "{ 9 } -> { 3 } -> { 19 } -> NULL";
+
+        $ll->insert(3);
+        $ll->insert(9);
+        $ll->append(19);
+
+        $this->assertTrue(
+            $ll->includes(19)
+        );
+
+        $this->assertEquals(
+            $expected,
+            $ll->toString()
+        );
+    }
+
+    /**
+     * @test Tests that multiple Node objects can be appended to the end of a Linked List.
+     */
+    public function testCanAppendMultipleNodesToTheEndOfALinkedList()
+    {
+        $ll = new LinkedList();
+        $expected = "{ 9 } -> { 3 } -> { 19 } -> { 42 } -> { 101 } -> NULL";
+
+        $ll->insert(3);
+        $ll->insert(9);
+        $ll->append(19);
+        $ll->append(42);
+        $ll->append(101);
 
         $this->assertEquals(
             $expected,

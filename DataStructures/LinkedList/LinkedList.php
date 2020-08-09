@@ -33,6 +33,26 @@ class LinkedList
     }
 
     /**
+     * Appends a new Node to the end of the Linked List.
+     *
+     * @param mixed $value The given value that the new Node to append to the Linked List should hold.
+     */
+    public function append($value): void
+    {
+        $newNode = new Node($value);
+
+        $currentNode = $this->head;
+
+        while ($currentNode->next !== null) {
+            $currentNode = $currentNode->next;
+        }
+
+        $currentNode->next = $newNode;
+
+        $newNode->next = null;
+    }
+
+    /**
      * Checks if the LinkedList contains a given value.
      *
      * @param mixed $value The value to check for within the LinkedList.
