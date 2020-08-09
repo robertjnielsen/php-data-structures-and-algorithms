@@ -23,6 +23,10 @@ Unit testing was accomplished via the PHPUnit testing framework. All classes / m
 
 ## Change Log
 
+**v1.5**: 20200808
+- All relevant unit tests passing.
+- Completed `Linked List` methods: `insertBefore`, `insertAfter`, `append`, and `removeNode`.
+
 **v1.4**: 20200807
 - Added unit testing for `Linked List` data structure.
 - Completed `Linked List` data structure.
